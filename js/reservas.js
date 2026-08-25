@@ -17,6 +17,8 @@ const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
 
 // R.5 — Calcula noches x precio de la habitación seleccionada
 function calcularPrecioTotal() {
+  if (!inputEntrada || !inputSalida || !selectTipoHabitacion) return;
+
   const fechaEntrada = new Date(inputEntrada.value);
   const fechaSalida = new Date(inputSalida.value);
   const opcionSeleccionada = selectTipoHabitacion.selectedOptions[0];
@@ -33,11 +35,30 @@ function calcularPrecioTotal() {
   }
 }
 
-[inputEntrada, inputSalida, selectTipoHabitacion].forEach((campo) => {
-  campo.addEventListener("change", calcularPrecioTotal);
-});
+if (inputEntrada && inputSalida && selectTipoHabitacion) {
+  [inputEntrada, inputSalida, selectTipoHabitacion].forEach((campo) => {
+    campo.addEventListener("change", calcularPrecioTotal);
+  });
+}
 
-// R.4 — Valida los campos obligatorios y coherencia de fechas
+// Función para descontar la habitación disponible del localStorage
+function descontarHabitacion(tipoReservado) {
+  const guardadas = localStorage.getItem("habitaciones_karamel");
+  
+  if (guardadas) {
+    const habitaciones = JSON.parse(guardadas);
+    const indice = habitaciones.findIndex((h) => h.tipo === tipoReservado);
+
+    if (indice !== -1 && habitaciones[indice].disponibles > 0) {
+      habitaciones[indice].disponibles -= 1; // Descuenta 1 unidad
+      localStorage.setItem("habitaciones_karamel", JSON.stringify(habitaciones));
+      return true;
+    }
+  }
+  return false;
+}
+
+// R.4 — Valida los campos obligatorios, la coherencia de fechas y el stock
 function validarReserva() {
   mensajeError.classList.add("d-none-karamel");
 
@@ -55,6 +76,18 @@ function validarReserva() {
     return false;
   }
 
+  // Verificar si hay disponibilidad disponible antes de procesar
+  const guardadas = localStorage.getItem("habitaciones_karamel");
+  if (guardadas) {
+    const habitaciones = JSON.parse(guardadas);
+    const habSeleccionada = habitaciones.find((h) => h.tipo === selectTipoHabitacion.value);
+    
+    if (habSeleccionada && habSeleccionada.disponibles <= 0) {
+      mostrarError("Lo sentimos, ya no quedan habitaciones disponibles de este tipo.");
+      return false;
+    }
+  }
+
   return true;
 }
 
@@ -65,12 +98,33 @@ function mostrarError(texto) {
 }
 
 // R.12 — Confirmación de reserva al enviar correctamente
-formReserva.addEventListener("submit", (evento) => {
-  evento.preventDefault();
+if (formReserva) {
+  formReserva.addEventListener("submit", (evento) => {
+    evento.preventDefault();
 
-  if (validarReserva()) {
-    mensajeError.classList.add("d-none-karamel");
-    mensajeConfirmacion.classList.remove("d-none-karamel");
-    // TODO (Anaïs): aquí se podría limpiar el formulario o guardar los datos
+    if (validarReserva()) {
+      const tipoSeleccionado = selectTipoHabitacion.value;
+
+      // Resta la habitación y guarda el nuevo total
+      descontarHabitacion(tipoSeleccionado);
+
+      mensajeError.classList.add("d-none-karamel");
+      mensajeConfirmacion.classList.remove("d-none-karamel");
+      
+      // Limpiar formulario tras confirmar
+      formReserva.reset();
+      spanPrecioTotal.textContent = "$0";
+    }
+  });
+}
+
+// Capturar parámetro 'habitacion' desde la URL y preseleccionar
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const habitacionParam = params.get("habitacion");
+
+  if (habitacionParam && selectTipoHabitacion) {
+    selectTipoHabitacion.value = habitacionParam;
+    calcularPrecioTotal(); // Recalcula si ya hay fechas ingresadas
   }
 });
