@@ -1,0 +1,148 @@
+/* ============================================
+   HOTEL KARAMEL — Hoja de estilos base
+   Paleta inspirada en el nombre del hotel: tonos
+   caramelo / ámbar sobre un fondo cálido oscuro.
+   ============================================ */
+
+:root {
+  --karamel-dark: #2b1810;      /* fondo header/footer */
+  --karamel-amber: #c17a3d;     /* acento principal (caramelo) */
+  --karamel-amber-light: #e0a868;
+  --karamel-cream: #faf6f0;     /* fondo general */
+  --karamel-text: #3a2c22;
+  --karamel-muted: #7a6a5c;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--karamel-text);
+  background-color: var(--karamel-cream);
+}
+
+h1, h2, h3, .navbar-brand {
+  font-family: var(--font-display);
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar-karamel {
+  background-color: var(--karamel-dark);
+}
+
+.navbar-karamel .navbar-brand {
+  color: var(--karamel-amber-light) !important;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar-karamel .nav-link {
+  color: #f0e6da !important;
+  margin-left: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.navbar-karamel .nav-link:hover {
+  color: var(--karamel-amber-light) !important;
+}
+
+/* Resaltado de la sección activa (controlado por js/main.js) */
+.navbar-karamel .nav-link.active {
+  color: var(--karamel-amber-light) !important;
+  border-bottom: 2px solid var(--karamel-amber-light);
+}
+
+/* ---------- HERO ---------- */
+.hero-karamel {
+  background: linear-gradient(rgba(43, 24, 16, 0.55), rgba(43, 24, 16, 0.55)),
+              url('../img/hero-hotel.jpg') center/cover no-repeat;
+  color: #fff;
+  padding: 6rem 1rem;
+  text-align: center;
+}
+
+.hero-karamel h1 {
+  font-size: 3rem;
+}
+
+/* ---------- BOTONES ---------- */
+.btn-karamel {
+  background-color: var(--karamel-amber);
+  border-color: var(--karamel-amber);
+  color: #fff;
+}
+
+.btn-karamel:hover {
+  background-color: var(--karamel-amber-light);
+  border-color: var(--karamel-amber-light);
+  color: #2b1810;
+}
+
+/* ---------- CARDS (habitaciones, servicios, testimonios) ---------- */
+.card-karamel {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(43, 24, 16, 0.1);
+  overflow: hidden;
+}
+
+.card-karamel .card-title {
+  font-family: var(--font-display);
+  color: var(--karamel-dark);
+}
+
+.card-karamel .precio {
+  color: var(--karamel-amber);
+  font-weight: 600;
+}
+
+/* ---------- SECCIONES ---------- */
+section {
+  padding: 4rem 0;
+}
+
+section h2 {
+  color: var(--karamel-dark);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* ---------- MENSAJES DE ESTADO (validaciones, confirmaciones) ---------- */
+.mensaje-exito {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border: 1px solid #2e7d32;
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+}
+
+.mensaje-error {
+  color: #c62828;
+  background-color: #fdecea;
+  border: 1px solid #c62828;
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+}
+
+.d-none-karamel {
+  display: none;
+}
+
+/* ---------- FOOTER ---------- */
+.footer-karamel {
+  background-color: var(--karamel-dark);
+  color: #f0e6da;
+  padding: 3rem 0 1.5rem;
+}
+
+.footer-karamel a {
+  color: var(--karamel-amber-light);
+  text-decoration: none;
+}
+
+.footer-karamel a:hover {
+  text-decoration: underline;
+}
