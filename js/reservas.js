@@ -88,7 +88,43 @@ function validarReserva() {
     }
   }
 
+  // Dentro del evento submit de reservas.js cuando la validación sea exitosa:
+if (validarReserva()) {
+  const usuarioActivo = obtenerUsuarioActivo();
+
+  if (!usuarioActivo) {
+    mostrarError("Debes iniciar sesión para realizar una reserva.");
+    return;
+  }
+
+  const nuevaReserva = {
+    id: Date.now(),
+    emailUsuario: usuarioActivo.email,
+    tipoHabitacion: selectTipoHabitacion.value,
+    fechaEntrada: inputEntrada.value,
+    fechaSalida: inputSalida.value,
+    huespedes: inputHuespedes.value,
+    precioTotal: spanPrecioTotal.textContent,
+    fechaCreacion: new Date().toLocaleDateString("es-CL")
+  };
+
+  // Guardar en el historial general de reservas
+  const historial = JSON.parse(localStorage.getItem("historial_reservas_karamel")) || [];
+  historial.push(nuevaReserva);
+  localStorage.setItem("historial_reservas_karamel", JSON.stringify(historial));
+
+  // Descontar cupo en habitaciones
+  descontarHabitacion(selectTipoHabitacion.value);
+
+  mensajeConfirmacion.classList.remove("d-none-karamel");
+  formReserva.reset();
+}
+
   return true;
+
+  
+
+  
 }
 
 function mostrarError(texto) {

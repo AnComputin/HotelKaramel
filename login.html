@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso — Hotel Karamel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-karamel navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Hotel Karamel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="habitaciones.html">Habitaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reservas.html">Reservas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item ms-lg-2" id="menu-usuario">
+                        <a class="btn btn-outline-light btn-sm active" href="login.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="container my-auto py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card card-karamel shadow-sm p-4">
+                    
+                    <h3 class="text-center mb-4">Bienvenido a Hotel Karamel</h3>
+
+                    <!-- Navegación por Pestañas (Login / Registro) -->
+                    <ul class="nav nav-pills nav-justified mb-4" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-semibold" id="tab-login-btn" data-bs-toggle="pill" data-bs-target="#panel-login" type="button" role="tab">
+                                Iniciar Sesión
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-semibold" id="tab-registro-btn" data-bs-toggle="pill" data-bs-target="#panel-registro" type="button" role="tab">
+                                Registrarse
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Mensaje de Feedback (Errores / Éxito) -->
+                    <div id="auth-mensaje" class="alert d-none" role="alert"></div>
+
+                    <div class="tab-content" id="authTabsContent">
+                        
+                        <!-- TAB: INICIAR SESIÓN -->
+                        <div class="tab-pane fade show active" id="panel-login" role="tabpanel">
+                            <form id="form-login">
+                                <div class="mb-3">
+                                    <label for="login-email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="login-email" placeholder="ejemplo@correo.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="login-pass" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="login-pass" placeholder="••••••••" required>
+                                </div>
+                                <button type="submit" class="btn btn-karamel w-100 py-2 mt-2">Ingresar</button>
+                            </form>
+                        </div>
+
+                        <!-- TAB: REGISTRO -->
+                        <div class="tab-pane fade" id="panel-registro" role="tabpanel">
+                            <form id="form-registro">
+                                <div class="mb-3">
+                                    <label for="reg-nombre" class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="reg-nombre" placeholder="Juan Pérez" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="reg-email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="reg-email" placeholder="ejemplo@correo.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="reg-pass" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="reg-pass" placeholder="Crea una contraseña" required>
+                                </div>
+                                <button type="submit" class="btn btn-karamel w-100 py-2 mt-2">Crear Cuenta</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-karamel mt-auto py-3">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2026 Hotel Karamel. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Scripts Propios -->
+    <script src="./js/auth.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const mensajeDiv = document.getElementById("auth-mensaje");
+
+            function mostrarMensaje(texto, esError = true) {
+                mensajeDiv.textContent = texto;
+                mensajeDiv.className = `alert ${esError ? 'alert-danger' : 'alert-success'}`;
+                mensajeDiv.classList.remove("d-none");
+            }
+
+            // Evento: Iniciar Sesión
+            document.getElementById("form-login").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const email = document.getElementById("login-email").value.trim();
+                const pass = document.getElementById("login-pass").value;
+
+                if (typeof iniciarSesion !== "function") {
+                    mostrarMensaje("Error: No se encontró la función de inicio de sesión. Revisa la ruta de js/auth.js", true);
+                    return;
+                }
+
+                const respuesta = iniciarSesion(email, pass);
+
+                if (respuesta.exito) {
+                    window.location.href = "perfil.html";
+                } else {
+                    mostrarMensaje(respuesta.mensaje, true);
+                }
+            });
+
+            // Evento: Registro (Crea, logea y redirige)
+            document.getElementById("form-registro").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const nombre = document.getElementById("reg-nombre").value.trim();
+                const email = document.getElementById("reg-email").value.trim();
+                const pass = document.getElementById("reg-pass").value;
+
+                if (typeof registrarUsuario !== "function") {
+                    mostrarMensaje("Error: No se encontró la función de registro. Revisa la ruta de js/auth.js", true);
+                    return;
+                }
+
+                const respuesta = registrarUsuario(nombre, email, pass);
+
+                if (respuesta.exito) {
+                    window.location.href = "perfil.html";
+                } else {
+                    mostrarMensaje(respuesta.mensaje, true);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

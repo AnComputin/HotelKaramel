@@ -23,12 +23,17 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="habitaciones.html">Habitaciones</a></li>
                     <li class="nav-item"><a class="nav-link" href="reservas.html">Reservas</a></li>
                     <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    
+                    <!-- Elemento dinámico para el perfil / login -->
+                    <li class="nav-item ms-lg-2" id="menu-usuario">
+                        <a class="btn btn-outline-light btn-sm" href="login.html">Iniciar Sesión</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -44,56 +49,55 @@
     <main>
 
         <!-- ===== R.10 Sección de testimonios ===== -->
-<section id="testimonios">
-    <div class="container">
-        <h2 class="text-center mb-4">Lo que dicen nuestros huéspedes</h2>
-        
-        <div class="row g-4" id="lista-testimonios">
+        <section id="testimonios">
+            <div class="container">
+                <h2 class="text-center mb-4">Lo que dicen nuestros huéspedes</h2>
+                
+                <div class="row g-4" id="lista-testimonios">
 
-            <!-- Testimonio 1 -->
-            <div class="col-md-4">
-                <div class="card card-karamel h-100 p-3 shadow-sm">
-                    <p class="card-text">"Una experiencia increíble, el servicio fue excelente."</p>
-                    <div class="mt-auto">
-                        <strong class="d-block">— Juan Perez</strong>
-                        <div class="text-warning">★★★★★</div>
+                    <!-- Testimonio 1 -->
+                    <div class="col-md-4">
+                        <div class="card card-karamel h-100 p-3 shadow-sm">
+                            <p class="card-text">"Una experiencia increíble, el servicio fue excelente."</p>
+                            <div class="mt-auto">
+                                <strong class="d-block">— Juan Perez</strong>
+                                <div class="text-warning">★★★★★</div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Testimonio 2 -->
+                    <div class="col-md-4">
+                        <div class="card card-karamel h-100 p-3 shadow-sm">
+                            <p class="card-text">"Muy buen lugar para alojarse, me gustó todo lo que ofrece."</p>
+                            <div class="mt-auto">
+                                <strong class="d-block">— Guillermo Lopez</strong>
+                                <div class="text-warning">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonio 3 -->
+                    <div class="col-md-4">
+                        <div class="card card-karamel h-100 p-3 shadow-sm">
+                            <p class="card-text">"Hermoso todo, volvería nuevamente."</p>
+                            <div class="mt-auto">
+                                <strong class="d-block">— Brainrot Gutierrez</strong>
+                                <div class="text-warning">★★★★★</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- Testimonio 2 -->
-            <div class="col-md-4">
-                <div class="card card-karamel h-100 p-3 shadow-sm">
-                    <p class="card-text">"Muy buen lugar para alojarse, me gustó todo lo que ofrece."</p>
-                    <div class="mt-auto">
-                        <strong class="d-block">— Guillermo Lopez</strong>
-                        <div class="text-warning">★★★★★</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonio 3 -->
-            <div class="col-md-4">
-                <div class="card card-karamel h-100 p-3 shadow-sm">
-                    <p class="card-text">"Hermoso todo, volvería nuevamente."</p>
-                    <div class="mt-auto">
-                        <strong class="d-block">— Brainrot Gutierrez</strong>
-                        <div class="text-warning">★★★★★</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- ===== R.14 Sección Sobre nosotros ===== -->
         <section id="sobre-nosotros" class="bg-white">
             <div class="container">
                 <h2>Sobre nosotros</h2>
-                <!-- TODO (Anaïs): historia, misión y valores del Hotel Karamel -->
                 <p class="text-center mx-auto" style="max-width: 700px;">
-                    Contenido pendiente: historia del hotel, misión y valores.
+                    Nuestro hotel tiene como principal función entregar un servicio amigable y cómodo junto con todo lo que ofrece, ya sea una estadía corta o extensa.
                 </p>
             </div>
         </section>
@@ -126,6 +130,9 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Scripts Propios (Cargar siempre auth.js antes de main.js) -->
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
