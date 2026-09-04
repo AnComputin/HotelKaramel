@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Karamel</title>
+    <title>Hotel Karamel - Inicio</title>
+
+    <!-- PRECARGA INSTANTÁNEA DE LA PRIMERA IMAGEN EN ALTA CALIDAD -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -15,124 +19,471 @@
 </head>
 <body>
 
-    <!-- ===== NAVBAR (R.11) ===== -->
-    <nav class="navbar navbar-expand-lg navbar-karamel navbar-dark sticky-top">
+   <!-- ===== SECCIÓN HERO CON NAVEGACIÓN Y CARRUSEL ===== -->
+<header class="hero-karamel p-0 overflow-hidden">
+
+    <!-- MENÚ SUPERIOR FLOTANTE -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-karamel navbar-hero">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Hotel Karamel</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo.png" alt="Hotel Karamel" class="logo-img">
+            </a>
+
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="habitaciones.html">Habitaciones</a></li>
                     <li class="nav-item"><a class="nav-link" href="reservas.html">Reservas</a></li>
                     <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                    
-                    <!-- Elemento dinámico para el perfil / login -->
-                    <li class="nav-item ms-lg-2" id="menu-usuario">
-                        <a class="btn btn-outline-light btn-sm" href="login.html">Iniciar Sesión</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- ===== HERO / R.1 Página de inicio ===== -->
-    <header class="hero-karamel">
-        <h1>Hotel Karamel</h1>
-        <p class="lead">Descanso, calidez y hospitalidad en cada detalle.</p>
-        <a href="reservas.html" class="btn btn-karamel btn-lg mt-3">Reservar ahora</a>
-    </header>
+    <!-- CARRUSEL MANUAL CON TEXTO Y BOTÓN INDIVIDUAL POR DIAPOSITIVA -->
+    <div id="carruselHero" class="carousel slide carousel-fade" data-bs-interval="false">
+        <div class="carousel-inner">
+            
+            <!-- Diapositiva 1: Inicio / Reservas -->
+            <div class="carousel-item active">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80" class="d-block w-100 hero-img" alt="Hotel Karamel">
+                <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center">
+                    <h1>Hotel Karamel</h1>
+                    <p class="lead">Descanso, calidez y hospitalidad en cada detalle.</p>
+                    <a href="reservas.html" class="btn btn-karamel btn-lg mt-3">Reservar ahora</a>
+                </div>
+            </div>
+
+            <!-- Diapositiva 2: Habitaciones -->
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80" class="d-block w-100 hero-img" alt="Habitaciones Hotel Karamel">
+                <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center">
+                    <h1>Nuestras Habitaciones</h1>
+                    <p class="lead">Espacios diseñados para garantizar tu máximo confort.</p>
+                    <a href="habitaciones.html" class="btn btn-karamel btn-lg mt-3">Ver habitaciones</a>
+                </div>
+            </div>
+<!-- Diapositiva 3: Servicios -->
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1600&q=80" class="d-block w-100 hero-img" alt="Servicios Hotel Karamel">
+            <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center">
+                <h1>Servicios Exclusivos</h1>
+                <p class="lead">Piscina, gastronomía y experiencias inolvidables a tu alcance.</p>
+                <a href="servicios.html" class="btn btn-karamel btn-lg mt-3">Conocer servicios</a>
+            </div>
+        </div>
+
+    </div> <!-- ESTE CIERRA EL carousel-inner -->
+
+    <!-- CONTROLES DEL CARRUSEL -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carruselHero" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carruselHero" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+
+</div> <!-- ESTE CIERRA EL carruselHero -->
+
+</header>
 
     <main>
-
-        <!-- ===== R.10 Sección de testimonios ===== -->
-        <section id="testimonios">
-            <div class="container">
-                <h2 class="text-center mb-4">Lo que dicen nuestros huéspedes</h2>
-                
-                <div class="row g-4" id="lista-testimonios">
-
-                    <!-- Testimonio 1 -->
-                    <div class="col-md-4">
-                        <div class="card card-karamel h-100 p-3 shadow-sm">
-                            <p class="card-text">"Una experiencia increíble, el servicio fue excelente."</p>
-                            <div class="mt-auto">
-                                <strong class="d-block">— Juan Perez</strong>
-                                <div class="text-warning">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonio 2 -->
-                    <div class="col-md-4">
-                        <div class="card card-karamel h-100 p-3 shadow-sm">
-                            <p class="card-text">"Muy buen lugar para alojarse, me gustó todo lo que ofrece."</p>
-                            <div class="mt-auto">
-                                <strong class="d-block">— Guillermo Lopez</strong>
-                                <div class="text-warning">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonio 3 -->
-                    <div class="col-md-4">
-                        <div class="card card-karamel h-100 p-3 shadow-sm">
-                            <p class="card-text">"Hermoso todo, volvería nuevamente."</p>
-                            <div class="mt-auto">
-                                <strong class="d-block">— Brainrot Gutierrez</strong>
-                                <div class="text-warning">★★★★★</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== R.14 Sección Sobre nosotros ===== -->
-        <section id="sobre-nosotros" class="bg-white">
-            <div class="container">
-                <h2>Sobre nosotros</h2>
-                <p class="text-center mx-auto" style="max-width: 700px;">
-                    Nuestro hotel tiene como principal función entregar un servicio amigable y cómodo junto con todo lo que ofrece, ya sea una estadía corta o extensa.
+   <!-- ============================================
+     SECCIÓN 1: BIENVENIDA / INFORMACIÓN DEL HOTEL
+============================================ -->
+<section class="sec-bienvenida py-5 overflow-hidden">
+    <div class="container-fluid px-0">
+        <div class="row g-0 align-items-center">
+            
+            <!-- Columna de Texto (Izquierda) -->
+            <div class="col-12 col-lg-5 ps-4 ps-md-5 pe-lg-4 py-4">
+                <span class="subtitulo-etiqueta">Bienvenido a</span>
+                <h2 class="titulo-destacado mb-4">Hotel Karamel</h2>
+                <p class="texto-cuerpo">
+                    Frente a las infinitas aguas del Océano Pacífico y a orillas de la costa de Viña del Mar, se esconde un rincón exclusivo donde el confort y la elegancia se unen: <strong>Hotel Karamel</strong>.
+                </p>
+                <p class="texto-cuerpo">
+                    Aquí, el sonido relajante de las olas y la brisa marina acompañan cada despertar. Cada detalle ha sido pensado cuidadosamente para que te sientas como en casa, pero completamente desconectado de lo cotidiano.
+                </p>
+                <p class="texto-cuerpo">
+                    Te invitamos a relajarte en un ambiente cálido, seguro y acogedor, disfrutando de instalaciones de lujo diseñadas para brindarte un descanso profundo frente al mar.
+                </p>
+                <p class="texto-cuerpo fw-medium">
+                    Ven a vivir una experiencia inolvidable donde el encanto costero de la Ciudad Jardín y nuestra hospitalidad se combinan para que siempre quieras volver.
                 </p>
             </div>
-        </section>
 
-    </main>
+            <!-- Columna de Imagen (Derecha) -->
+            <div class="col-12 col-lg-7 ms-auto">
+                <img src="img/HotelKaramel.png" alt="Hotel Karamel" class="img-fluid w-100 style-img-bienvenida">
+            </div>
 
-    <!-- ===== R.15 Footer con datos de contacto (compartido en todas las páginas) ===== -->
-    <footer class="footer-karamel">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <h5>Hotel Karamel</h5>
-                    <p>Dirección: Calle Ejemplo 123, Santiago</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     DESCUBRE NUESTRO HOTEL
+============================================ -->
+<section class="sec-descubre py-5">
+    <div class="container-fluid px-lg-5">
+        <!-- Título de la sección -->
+        <div class="text-center mb-4">
+            <h2 class="titulo-seccion">Descubre nuestro hotel</h2>
+        </div>
+
+        <!-- Carrusel multi-imagen de menor tamaño -->
+        <div id="carruselDescubre" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                
+                <!-- Diapositiva 1 -->
+               <div class="carousel-item active">
+              <div class="row g-3">
+                <div class="col-12 col-md-6 col-lg-4">
+                  <img src="img/terraza.jpeg" class="d-block w-100 img-carrusel-descubre" alt="Vista y terrazas">
                 </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Contacto</h5>
-                    <p>Teléfono: +56 9 1234 5678<br>
-                    Correo: contacto@hotelkaramel.cl</p>
+                <div class="col-12 col-md-6 col-lg-4 d-none d-md-block">
+                  <img src="img/piscina.png" class="d-block w-100 img-carrusel-descubre" alt="Huéspedes disfrutando">
                 </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Síguenos</h5>
-                    <a href="#" class="me-2">Instagram</a>
-                    <a href="#">Facebook</a>
+                <div class="col-12 col-lg-4 d-none d-lg-block">
+                  <img src="img/louge.jpeg" class="d-block w-100 img-carrusel-descubre" alt="Salones y convivencia">
+                </div>
+              </div>
+            </div>
+
+                <!-- Diapositiva 2 -->
+                <div class="carousel-item">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <img src="agregar imagen" class="d-block w-100 img-carrusel-descubre" alt="Áreas de descanso">
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 d-none d-md-block">
+                            <img src="img/Restaurant.png" class="d-block w-100 img-carrusel-descubre" alt="Experiencias Karamel">
+                        </div>
+                        <div class="col-12 col-lg-4 d-none d-lg-block">
+                            <img src="img/recepcion.jpeg" class="d-block w-100 img-carrusel-descubre" alt="Espacios del hotel">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Flechas de navegación -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carruselDescubre" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carruselDescubre" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SECCIÓN 2: UBICACIÓN
+============================================ -->
+<section class="sec-ubicacion py-5 bg-suave">
+    <div class="container py-lg-3">
+        <div class="row align-items-center g-5">
+            <!-- Texto izquierda -->
+            <div class="col-lg-6">
+                <h2 class="titulo-seccion mb-4">Ubicación</h2>
+                <p class="texto-cuerpo">
+                    Situado en un entorno privilegiado de fácil acceso, <strong>Hotel Karamel</strong> se encuentra rodeado de los principales atractivos turísticos, restaurantes, centros culturales y paseos de la zona.
+                </p>
+                <p class="texto-cuerpo">
+                    Nuestra ubicación estratégica te permite disfrutar del silencio y la tranquilidad de nuestras instalaciones, estando a solo minutos de los puntos de mayor interés de la ciudad.
+                </p>
+            </div>
+            <!-- Imagen / Mapa derecha -->
+            <div class="col-lg-6">
+                <div class="mapa-contenedor rounded-4 overflow-hidden shadow-sm">
+                    <img src="img/mapa.jpeg" alt="Ubicación Hotel Karamel" class="img-fluid w-100">
                 </div>
             </div>
-            <hr>
-            <p class="text-center mb-0">&copy; 2026 Hotel Karamel. Todos los derechos reservados.</p>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ============================================
+     SECCIÓN 3: NUESTRO COMPROMISO
+============================================ -->
+<section class="sec-compromiso py-5">
+    <div class="container py-lg-3">
+        <div class="row align-items-center g-5">
+            <!-- Imagen izquierda -->
+            <div class="col-lg-6 order-2 order-lg-1">
+                <div class="contenedor-img-compromiso">
+                    <img src="img/eco.jpg" alt="Nuestro Compromiso" class="img-fluid rounded-4 shadow-sm w-100 style-img-compromiso">
+                </div>
+            </div>
+            <!-- Texto derecha -->
+            <div class="col-lg-6 order-1 order-lg-2">
+                <h2 class="titulo-seccion mb-4">Nuestro Compromiso</h2>
+                <p class="texto-cuerpo">
+                    En Hotel Karamel vivimos la hospitalidad sustentable como parte de nuestro día a día. Nos esforzamos por reducir el impacto ambiental promoviendo el reciclaje y el uso responsable de los recursos.
+                </p>
+                <p class="texto-cuerpo">
+                    Cuidamos nuestra infraestructura y apoyamos el trabajo de productores y artesanos locales, buscando brindar una experiencia consciente, armónica y alineada con el bienestar de nuestros huéspedes y la comunidad.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- ==========================================================================
+     SECCIÓN OPINIONES DE NUESTROS HUÉSPEDES
+     ========================================================================== -->
+<section id="opiniones" class="sec-opiniones py-5">
+  <!-- Cambio a container-fluid para expandir a lo ancho -->
+  <div class="container-fluid px-3 px-lg-5 position-relative">
     
-    <!-- Scripts Propios (Cargar siempre auth.js antes de main.js) -->
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-5">
+      <h2 class="titulo-seccion">Opiniones de nuestros huéspedes</h2>
+      <p class="subtitulo-seccion text-muted">Descubre lo que opinan nuestros huéspedes sobre su experiencia</p>
+    </div>
+
+    <!-- Carrusel de Testimonios -->
+    <div id="carruselOpiniones" class="carousel slide pb-5" data-bs-ride="carousel">
+      
+      <!-- Indicadores de navegación -->
+      <div class="carousel-indicators" style="bottom: -20px;">
+        <button type="button" data-bs-target="#carruselOpiniones" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Diapositiva 1"></button>
+        <button type="button" data-bs-target="#carruselOpiniones" data-bs-slide-to="1" aria-label="Diapositiva 2"></button>
+      </div>
+
+      <!-- Contenedor Único de Diapositivas -->
+      <div class="carousel-inner px-2 px-md-4">
+
+        <!-- Diapositiva 1 -->
+        <div class="carousel-item active">
+          <div class="row g-4">
+            
+            <!-- Tarjeta 1 -->
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card-opinion h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="badge-puntuacion me-3">100</div>
+                  <div>
+                    <h5 class="nombre-usuario mb-0">Carolina</h5>
+                    <small class="text-muted">CL · Huésped verificado</small>
+                  </div>
+                </div>
+                <p class="texto-opinion">“Excelente servicio de parte del personal, instalaciones limpias e impecables. Agradecer puntualmente el servicio del personal al momento de solicitar ayuda, en nuestro caso batas y toallas. ¡Felicidades!”</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top-custom">
+                  <span class="corazon-likes"><i class="bi bi-heart-fill"></i> 10</span>
+                  <small class="fecha-opinion">22 de diciembre de 2025</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 2 -->
+            <div class="col-12 col-md-6 col-lg-4 d-none d-md-block">
+              <div class="card-opinion h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="badge-puntuacion me-3">98</div>
+                  <div>
+                    <h5 class="nombre-usuario mb-0">Mateo R.</h5>
+                    <small class="text-muted">AR · Huésped verificado</small>
+                  </div>
+                </div>
+                <p class="texto-opinion">“Ubicación inmejorable frente al mar. La vista al atardecer desde el lounge y la tranquilidad del spa superaron nuestras expectativas. Definitivamente volveremos.”</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top-custom">
+                  <span class="corazon-likes"><i class="bi bi-heart-fill"></i> 8</span>
+                  <small class="fecha-opinion">15 de enero de 2026</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 3 -->
+            <div class="col-12 col-lg-4 d-none d-lg-block">
+              <div class="card-opinion h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="badge-puntuacion me-3">100</div>
+                  <div>
+                    <h5 class="nombre-usuario mb-0">Valeria S.</h5>
+                    <small class="text-muted">ES · Huésped verificado</small>
+                  </div>
+                </div>
+                <p class="texto-opinion">“Muy buen hotel, excelente atención en la recepción y una gastronomía de primer nivel. Muy cómodo, con buen desayuno y servicios de excelencia.”</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top-custom">
+                  <span class="corazon-likes"><i class="bi bi-heart-fill"></i> 12</span>
+                  <small class="fecha-opinion">19 de febrero de 2026</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Diapositiva 2 -->
+        <div class="carousel-item">
+          <div class="row g-4">
+            
+            <!-- Tarjeta 1 (Diapo 2) -->
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card-opinion h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="badge-puntuacion me-3">100</div>
+                  <div>
+                    <h5 class="nombre-usuario mb-0">Lucas M.</h5>
+                    <small class="text-muted">BR · Huésped verificado</small>
+                  </div>
+                </div>
+                <p class="texto-opinion">“Una experiencia inolvidable. La piscina climatizada y el desayuno buffet fueron los puntos más destacados de nuestro viaje. El personal cuidó cada detalle de nuestra estancia.”</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top-custom">
+                  <span class="corazon-likes"><i class="bi bi-heart-fill"></i> 15</span>
+                  <small class="fecha-opinion">28 de febrero de 2026</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 2 (Diapo 2) -->
+            <div class="col-12 col-md-6 col-lg-4 d-none d-md-block">
+              <div class="card-opinion h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="badge-puntuacion me-3">96</div>
+                  <div>
+                    <h5 class="nombre-usuario mb-0">Camila Y.</h5>
+                    <small class="text-muted">CL · Huésped verificado</small>
+                  </div>
+                </div>
+                <p class="texto-opinion">“Alojamiento impecable. Las camas son sumamente cómodas y el servicio a la habitación fue muy rápido. La tranquilidad del lugar es perfecta para desconectar del trabajo.”</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top-custom">
+                  <span class="corazon-likes"><i class="bi bi-heart-fill"></i> 9</span>
+                  <small class="fecha-opinion">5 de marzo de 2026</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tarjeta 3 (Diapo 2) -->
+            <div class="col-12 col-lg-4 d-none d-lg-block">
+              <div class="card-opinion h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="badge-puntuacion me-3">100</div>
+                  <div>
+                    <h5 class="nombre-usuario mb-0">Javier T.</h5>
+                    <small class="text-muted">MX · Huésped verificado</small>
+                  </div>
+                </div>
+                <p class="texto-opinion">“El diseño cálido del hotel te hace sentir como en casa. La atención en recepción fue rápida y nos ayudaron con excelentes recomendaciones. Sin duda el mejor hotel de la zona.”</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top-custom">
+                  <span class="corazon-likes"><i class="bi bi-heart-fill"></i> 14</span>
+                  <small class="fecha-opinion">12 de marzo de 2026</small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Flechas de navegación del carrusel -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carruselOpiniones" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carruselOpiniones" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+
+    </div>
+  </div>
+</section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+<footer class="footer-karamel py-5">
+  <div class="container">
+    <div class="row g-4">
+      
+      <!-- Columna 1: Branding y Ubicación -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <h5 class="fw-bold mb-3">Hotel Karamel</h5>
+        <p class="small text-muted mb-3">
+          Un refugio de confort y tranquilidad frente al mar. Disfruta de instalaciones impecables, gastronomía de primer nivel y una experiencia inolvidable.
+        </p>
+        <p class="small mb-1">
+          <i class="bi bi-geo-alt-fill text-warning me-2"></i>Av. Marina 456, Viña del Mar, Chile
+        </p>
+      </div>
+
+      <!-- Columna 2: Navegación Rápida -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h5 class="fw-bold mb-3">Navegación</h5>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-2"><a href="#inicio" class="link-footer">Inicio</a></li>
+          <li class="mb-2"><a href="#habitaciones" class="link-footer">Habitaciones</a></li>
+          <li class="mb-2"><a href="#servicios" class="link-footer">Servicios & Spa</a></li>
+          <li class="mb-2"><a href="#opiniones" class="link-footer">Opiniones</a></li>
+          <li class="mb-2"><a href="#contacto" class="link-footer">Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Contacto y Horarios de Atención -->
+      <div class="col-6 col-md-3 col-lg-3">
+        <h5 class="fw-bold mb-3">Contacto & Recepción</h5>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-2">
+            <i class="bi bi-telephone-fill me-2"></i>+56 32 212 3456
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-whatsapp me-2"></i>+56 9 8765 4321
+          </li>
+          <li class="mb-3">
+            <i class="bi bi-envelope-fill me-2"></i>reservas@hotelkaramel.cl
+          </li>
+          <li class="pt-2 border-top border-secondary-subtle">
+            <span class="d-block text-muted"><strong>Check-in:</strong> 15:00 hrs</span>
+            <span class="d-block text-muted"><strong>Check-out:</strong> 12:00 hrs</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Redes Sociales -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="fw-bold mb-3">Conecta con Nosotros</h5>
+        <p class="small text-muted mb-3">Síguenos para descubrir ofertas exclusivas y novedades.</p>
+        <div class="d-flex gap-3 fs-5">
+          <a href="#" class="icono-red" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="icono-red" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="icono-red" aria-label="TripAdvisor"><i class="bi bi-tripadvisor"></i></a>
+          <a href="#" class="icono-red" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-secondary-subtle">
+
+    <!-- Pie Inferior: Copyright y Legal -->
+    <div class="row align-items-center small text-muted">
+      <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+        &copy; 2026 Hotel Karamel. Todos los derechos reservados.
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="#" class="link-footer me-3">Política de Privacidad</a>
+        <a href="#" class="link-footer">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- Bootstrap JS & Script Principal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+
+
 </body>
 </html>

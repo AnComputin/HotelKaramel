@@ -6,33 +6,38 @@
     <title>Habitaciones — Hotel Karamel</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- ===== NAVBAR (igual en todas las páginas) ===== -->
-    <nav class="navbar navbar-expand-lg navbar-karamel navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Hotel Karamel</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="habitaciones.html">Habitaciones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="reservas.html">Reservas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                </ul>
+<!-- Cabecera unificada -->
+    <header class="hero-secundario">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-karamel">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/logo.png" alt="Hotel Karamel" class="logo-img">
+                </a>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="habitaciones.html">Habitaciones</a></li>
+                        <li class="nav-item"><a class="nav-link" href="reservas.html">Reservas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <header class="hero-karamel py-5">
-        <h1>Nuestras Habitaciones</h1>
+        <div class="container text-center py-2">
+            <h1 class="titulo-pagina">Nuestras Habitaciones</h1>
+        </div>
     </header>
 
     <main class="container">
@@ -55,7 +60,7 @@
                         <option value="0">Sin límite</option>
                         <option value="50000">Hasta $50.000</option>
                         <option value="80000">Hasta $80.000</option>
-                        <option value="120000">Hasta $120.000</option>
+                        <option value="150000">Hasta $150.000</option>
                     </select>
                 </div>
             </div>
@@ -69,49 +74,95 @@
         <!-- ===== R.2 Galería de habitaciones ===== -->
         <section class="pt-0">
             <div class="row g-4" id="lista-habitaciones">
-                <!-- TODO (Mark): este contenedor se llena dinámicamente desde js/habitaciones.js
-                     usando un array de objetos {nombre, tipo, precio, imagen, descripcion}.
-                     Ejemplo de card esperado por habitacion: -->
-                <div class="col-md-4 habitacion-card" data-tipo="doble" data-precio="65000">
-                    <div class="card card-karamel h-100">
-                        <img src="img/habitacion-doble.jpg" class="card-img-top" alt="Habitación Doble">
-                        <div class="card-body">
-                            <h5 class="card-title">Habitación Doble</h5>
-                            <p class="card-text">Descripción breve de la habitación.</p>
-                            <p class="precio">$65.000 / noche</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Este contenedor se llena 100% dinámicamente desde js/habitaciones.js
+                     (array `habitaciones`, función renderizarHabitaciones). No agregar cards
+                     a mano acá: se borrarían apenas cargue la página. -->
             </div>
         </section>
 
     </main>
 
-    <footer class="footer-karamel mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <h5>Hotel Karamel</h5>
-                    <p>Dirección: Calle Ejemplo 123, Santiago</p>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Contacto</h5>
-                    <p>Teléfono: +56 9 1234 5678<br>Correo: contacto@hotelkaramel.cl</p>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Síguenos</h5>
-                    <a href="#" class="me-2">Instagram</a>
-                    <a href="#">Facebook</a>
-                </div>
-            </div>
-            <hr>
-            <p class="text-center mb-0">&copy; 2026 Hotel Karamel. Todos los derechos reservados.</p>
+    <!-- ===== FOOTER ===== -->
+<footer class="footer-karamel py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Columna 1: Branding y Ubicación -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <h5 class="fw-bold mb-3">Hotel Karamel</h5>
+        <p class="small text-muted mb-3">
+          Un refugio de confort y tranquilidad frente al mar. Disfruta de instalaciones impecables, gastronomía de primer nivel y una experiencia inolvidable.
+        </p>
+        <p class="small mb-1">
+          <i class="bi bi-geo-alt-fill text-warning me-2"></i>Av. Marina 456, Viña del Mar, Chile
+        </p>
+      </div>
+
+      <!-- Columna 2: Navegación Rápida -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h5 class="fw-bold mb-3">Navegación</h5>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-2"><a href="index.html" class="link-footer">Inicio</a></li>
+          <li class="mb-2"><a href="habitaciones.html" class="link-footer">Habitaciones</a></li>
+          <li class="mb-2"><a href="servicios.html" class="link-footer">Servicios & Spa</a></li>
+          <li class="mb-2"><a href="index.html#opiniones" class="link-footer">Opiniones</a></li>
+          <li class="mb-2"><a href="contacto.html" class="link-footer">Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Contacto y Horarios de Atención -->
+      <div class="col-6 col-md-3 col-lg-3">
+        <h5 class="fw-bold mb-3">Contacto & Recepción</h5>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-2">
+            <i class="bi bi-telephone-fill me-2"></i>+56 32 212 3456
+          </li>
+          <li class="mb-2">
+            <i class="bi bi-whatsapp me-2"></i>+56 9 8765 4321
+          </li>
+          <li class="mb-3">
+            <i class="bi bi-envelope-fill me-2"></i>reservas@hotelkaramel.cl
+          </li>
+          <li class="pt-2 border-top border-secondary-subtle">
+            <span class="d-block text-muted"><strong>Check-in:</strong> 15:00 hrs</span>
+            <span class="d-block text-muted"><strong>Check-out:</strong> 12:00 hrs</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Redes Sociales -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="fw-bold mb-3">Conecta con Nosotros</h5>
+        <p class="small text-muted mb-3">Síguenos para descubrir ofertas exclusivas y novedades.</p>
+        <div class="d-flex gap-3 fs-5">
+          <a href="#" class="icono-red" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="icono-red" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="icono-red" aria-label="TripAdvisor"><i class="bi bi-tripadvisor"></i></a>
+          <a href="#" class="icono-red" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
         </div>
-    </footer>
+      </div>
+
+    </div>
+
+    <hr class="my-4 border-secondary-subtle">
+
+    <!-- Pie Inferior: Copyright y Legal -->
+    <div class="row align-items-center small text-muted">
+      <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+        &copy; 2026 Hotel Karamel. Todos los derechos reservados.
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="#" class="link-footer me-3">Política de Privacidad</a>
+        <a href="#" class="link-footer">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/habitaciones-data.js"></script>
     <script src="js/habitaciones.js"></script>
 </body>
 </html>

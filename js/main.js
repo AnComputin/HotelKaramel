@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   enlaces.forEach((enlace) => {
     const href = enlace.getAttribute("href");
+    // Se limpia primero por si quedó una clase "active" puesta a mano en el HTML,
+    // así nunca hay dos links marcados como activos al mismo tiempo.
+    enlace.classList.remove("active");
     if (href === paginaActual) {
       enlace.classList.add("active");
     }

@@ -1,79 +1,470 @@
 /* ============================================
-   auth.js — Sistema de Autenticación y Sesión
+auth.js
+Sistema central de autenticación
+Hotel Karamel 
+============================================ */
+
+
+/* ============================================
+CONFIGURACIÓN
    ============================================ */
 
-// Registrar usuario e iniciar sesión automáticamente
+const CLAVE_USUARIOS = "usuarios_karamel";
+const CLAVE_USUARIO_ACTUAL = "usuario_actual_karamel";
+
+
+/* ============================================
+OBTENER TODOS LOS USUARIOS
+   ============================================ */
+
+function obtenerUsuarios() {
+    const usuariosGuardados = localStorage.getItem(CLAVE_USUARIOS);
+
+    if (!usuariosGuardados) {
+        return [];
+    }
+
+    return JSON.parse(usuariosGuardados);
+}
+
+
+/* ============================================
+GUARDAR USUARIOS
+   ============================================ */
+
+function guardarUsuarios(usuarios) {
+    localStorage.setItem(
+        CLAVE_USUARIOS,
+        JSON.stringify(usuarios)
+    );
+}
+
+
+/* ============================================
+BUSCAR USUARIO POR CORREO
+   ============================================ */
+
+function buscarUsuarioPorEmail(email) {
+    const usuarios = obtenerUsuarios();
+
+    return usuarios.find(
+        (usuario) =>
+            usuario.email.toLowerCase() === email.toLowerCase()
+    );
+}
+
+
+/* ============================================
+REGISTRAR NUEVO USUARIO
+   ============================================ */
+
 function registrarUsuario(nombre, email, password) {
-  const usuarios = JSON.parse(localStorage.getItem("usuarios_karamel")) || [];
 
-  // Verificar si el correo ya existe
-  const existe = usuarios.find((u) => u.email === email);
-  if (existe) {
-    return { exito: false, mensaje: "El correo ya se encuentra registrado." };
-  }
+    // Obtener usuarios existentes
+    const usuarios = obtenerUsuarios();
 
-  const nuevoUsuario = { nombre, email, password };
-  usuarios.push(nuevoUsuario);
-  localStorage.setItem("usuarios_karamel", JSON.stringify(usuarios));
+    // Revisar si el correo ya está registrado
+    const usuarioExistente = buscarUsuarioPorEmail(email);
 
-  // Iniciar sesión inmediatamente
-  localStorage.setItem("usuario_activo", JSON.stringify(nuevoUsuario));
-  return { exito: true };
+    if (usuarioExistente) {
+        return {
+            exito: false,
+            mensaje: "Ya existe una cuenta registrada con este correo."
+        };
+    }
+
+
+    // Crear nuevo usuario
+    const nuevoUsuario = {
+        id: Date.now(),
+        nombre: nombre.trim(),
+        email: email.trim().toLowerCase(),
+        password: password
+    };
+
+
+    // Agregar usuario
+    usuarios.push(nuevoUsuario);
+
+
+    // Guardar usuarios
+    guardarUsuarios(usuarios);
+
+
+    return {
+        exito: true,
+        mensaje: "Usuario registrado correctamente.",
+        usuario: nuevoUsuario
+    };
 }
 
-// Iniciar Sesión
+
+/* ============================================
+   INICIAR SESIÓN
+   ============================================ */
+
 function iniciarSesion(email, password) {
-  const usuarios = JSON.parse(localStorage.getItem("usuarios_karamel")) || [];
-  const usuario = usuarios.find((u) => u.email === email && u.password === password);
 
-  if (!usuario) {
-    return { exito: false, mensaje: "Correo o contraseña incorrectos." };
-  }
+    const usuario = buscarUsuarioPorEmail(email);
 
-  localStorage.setItem("usuario_activo", JSON.stringify(usuario));
-  return { exito: true };
+    // Revisar si existe el usuario
+    if (!usuario) {
+        return {
+            exito: false,
+            mensaje: "No existe una cuenta registrada con este correo."
+        };
+    }
+
+
+    // Revisar contraseña
+    if (usuario.password !== password) {
+        return {
+            exito: false,
+            mensaje: "La contraseña es incorrecta."
+        };
+    }
+
+
+    // Guardar sesión actual
+    localStorage.setItem(
+        CLAVE_USUARIO_ACTUAL,
+        JSON.stringify(usuario)
+    );
+
+
+    return {
+        exito: true,
+        mensaje: "Inicio de sesión exitoso.",
+        usuario: usuario
+    };
 }
 
-// Obtener el usuario con sesión activa
-function obtenerUsuarioActivo() {
-  const usuario = localStorage.getItem("usuario_activo");
-  return usuario ? JSON.parse(usuario) : null;
+
+/* ============================================
+OBTENER USUARIO ACTUAL
+   ============================================ */
+
+function obtenerUsuarioActual() {
+
+    const usuarioActual = localStorage.getItem(
+        CLAVE_USUARIO_ACTUAL
+    );
+
+    if (!usuarioActual) {
+        return null;
+    }
+
+    return JSON.parse(usuarioActual);
 }
 
-// Cerrar Sesión
+
+/* ============================================
+VERIFICAR SI HAY UNA SESIÓN ACTIVA
+   ============================================ */
+
+function usuarioHaIniciadoSesion() {
+
+    const usuario = obtenerUsuarioActual();
+
+    return usuario !== null;
+}
+
+
+/* ============================================
+CERRAR SESIÓN
+   ============================================ */
+
 function cerrarSesion() {
-  localStorage.removeItem("usuario_activo");
-  window.location.href = "login.html";
+
+    localStorage.removeItem(
+        CLAVE_USUARIO_ACTUAL
+    );
+
+    window.location.href = "index.html";
 }
 
-// Actualizar el botón de la barra de navegación dinámicamente
-function actualizarNavbar() {
-  const contenedorMenu = document.getElementById("menu-usuario");
-  if (!contenedorMenu) return;
 
-  const usuarioActivo = obtenerUsuarioActivo();
+/* ============================================
+   MENÚ DINÁMICO DE USUARIO
+   ============================================ */
 
-  if (usuarioActivo) {
-    // Si hay sesión iniciada: Botón directo a "Mi Perfil" + Menú desplegable
-    contenedorMenu.innerHTML = `
-      <div class="dropdown">
-        <button class="btn btn-karamel dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          👤 ${usuarioActivo.nombre}
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item fw-bold" href="perfil.html">Ver Mi Perfil</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><button class="dropdown-item text-danger" onclick="cerrarSesion()">Cerrar Sesión</button></li>
-        </ul>
-      </div>
-    `;
-  } else {
-    // Si NO hay sesión: Botón Iniciar Sesión
-    contenedorMenu.innerHTML = `
-      <a class="btn btn-outline-light btn-sm" href="login.html">Iniciar Sesión</a>
-    `;
-  }
+function actualizarMenuUsuario() {
+
+    // Buscar todos los menús de navegación
+    const menus = document.querySelectorAll(
+        ".navbar-nav"
+    );
+
+
+    // Obtener usuario conectado
+    const usuario = obtenerUsuarioActual();
+
+
+    menus.forEach(function (menu) {
+
+        // Buscar menú anterior de autenticación
+        const menuAuthAnterior = menu.querySelector(
+            ".menu-auth"
+        );
+
+
+        // Si existe, eliminarlo para evitar duplicados
+        if (menuAuthAnterior) {
+
+            menuAuthAnterior.remove();
+
+        }
+
+
+        /* ============================================
+           USUARIO SIN SESIÓN
+           ============================================ */
+
+        if (!usuario) {
+
+            menu.insertAdjacentHTML(
+                "beforeend",
+
+                `
+                <li class="nav-item menu-auth">
+                    <a
+                        class="nav-link"
+                        href="registro.html"
+                    >
+                        Registrarse
+                    </a>
+                </li>
+
+                <li class="nav-item menu-auth">
+                    <a
+                        class="nav-link"
+                        href="login.html"
+                    >
+                        Iniciar sesión
+                    </a>
+                </li>
+                `
+            );
+
+            return;
+
+        }
+
+
+        /* ============================================
+           USUARIO CON SESIÓN
+           ============================================ */
+
+        menu.insertAdjacentHTML(
+            "beforeend",
+
+            `
+            <li class="nav-item menu-auth">
+                <a
+                    class="nav-link"
+                    href="perfil.html"
+                >
+                    <i class="bi bi-person-circle"></i>
+                    Mi perfil
+                </a>
+            </li>
+
+            <li class="nav-item menu-auth">
+                <a
+                    class="nav-link"
+                    href="#"
+                    id="btnCerrarSesion"
+                >
+                    Cerrar sesión
+                </a>
+            </li>
+            `
+        );
+
+    });
+
+
+    /* ============================================
+       EVENTO CERRAR SESIÓN
+       ============================================ */
+
+    const botonesCerrarSesion = document.querySelectorAll(
+        "#btnCerrarSesion"
+    );
+
+
+    botonesCerrarSesion.forEach(
+        function (boton) {
+
+            boton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    cerrarSesion();
+
+                }
+            );
+
+        }
+    );
+
 }
 
-// Ejecutar automáticamente al cargar cualquier página
-document.addEventListener("DOMContentLoaded", actualizarNavbar);
+
+/* ============================================
+   EJECUTAR AL CARGAR LA PÁGINA
+   ============================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        actualizarMenuUsuario();
+
+    }
+);
+
+
+/* ============================================
+   MENÚ DINÁMICO DE USUARIO
+   ============================================ */
+
+
+function actualizarMenuUsuario() {
+
+    // Buscar todos los menús de navegación
+    const menus = document.querySelectorAll(
+        ".navbar-nav"
+    );
+
+
+    // Obtener usuario conectado
+    const usuario = obtenerUsuarioActual();
+
+
+    menus.forEach(function (menu) {
+
+        // Eliminar todos los elementos anteriores
+        // relacionados con autenticación
+        const menusAuthAnteriores = menu.querySelectorAll(
+            ".menu-auth"
+        );
+
+        menusAuthAnteriores.forEach(function (elemento) {
+            elemento.remove();
+        });
+
+
+        /* ============================================
+           USUARIO SIN SESIÓN
+           ============================================ */
+
+        if (!usuario) {
+
+            menu.insertAdjacentHTML(
+                "beforeend",
+
+                `
+                <li class="nav-item menu-auth">
+                    <a
+                        class="nav-link"
+                        href="registro.html"
+                    >
+                        Registrarse
+                    </a>
+                </li>
+
+                <li class="nav-item menu-auth">
+                    <a
+                        class="nav-link"
+                        href="login.html"
+                    >
+                        Iniciar sesión
+                    </a>
+                </li>
+                `
+            );
+
+            return;
+        }
+
+
+        /* ============================================
+           USUARIO CON SESIÓN
+           ============================================ */
+
+        menu.insertAdjacentHTML(
+            "beforeend",
+
+            `
+            <li class="nav-item menu-auth">
+                <a
+                    class="nav-link"
+                    href="perfil.html"
+                >
+                    <i class="bi bi-person-circle"></i>
+                    Mi perfil
+                </a>
+            </li>
+
+            <li class="nav-item menu-auth">
+                <a
+                    class="nav-link btn-cerrar-sesion"
+                    href="#"
+                >
+                    Cerrar sesión
+                </a>
+            </li>
+            `
+        );
+
+    });
+
+
+    /* ============================================
+       EVENTO CERRAR SESIÓN
+       ============================================ */
+
+    const botonesCerrarSesion = document.querySelectorAll(
+        ".btn-cerrar-sesion"
+    );
+
+
+    botonesCerrarSesion.forEach(
+        function (boton) {
+
+            boton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    cerrarSesion();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+
+
+/* ============================================
+   EJECUTAR AL CARGAR LA PÁGINA
+   ============================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        actualizarMenuUsuario();
+
+    }
+);
+
+

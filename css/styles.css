@@ -1,18 +1,20 @@
-/* ============================================
-   HOTEL KARAMEL — Hoja de estilos base
-   Paleta inspirada en el nombre del hotel: tonos
-   caramelo / ámbar sobre un fondo cálido oscuro.
-   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&family=Tenor+Sans&display=swap');
 
+/* ==========================================================================
+   1. VARIABLES GLOBALES Y TIPOGRAFÍA
+   ========================================================================== */
 :root {
-  --karamel-dark: #2b1810;      /* fondo header/footer */
-  --karamel-amber: #c17a3d;     /* acento principal (caramelo) */
+  --karamel-dark: #2a1b15;
+  --karamel-dark-deep: #1c1815;
+  --karamel-amber: #c17a3d;
   --karamel-amber-light: #e0a868;
-  --karamel-cream: #faf6f0;     /* fondo general */
+  --karamel-cream: #faf6f0;
+  --karamel-cream-soft: #f7f4ee;
   --karamel-text: #3a2c22;
   --karamel-muted: #7a6a5c;
+  --karamel-green: #2b5e32;
 
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-display: 'Josefin Sans', 'Tenor Sans', Georgia, serif;
   --font-body: 'Poppins', 'Segoe UI', sans-serif;
 }
 
@@ -20,71 +22,249 @@ body {
   font-family: var(--font-body);
   color: var(--karamel-text);
   background-color: var(--karamel-cream);
+  line-height: 1.6;
 }
 
-h1, h2, h3, .navbar-brand {
+h1, h2, h3, h4, h5, .navbar-brand {
   font-family: var(--font-display);
 }
 
-/* ---------- NAVBAR ---------- */
+/* ==========================================================================
+   2. NAVBAR Y NAVEGACIÓN
+   ========================================================================== */
 .navbar-karamel {
   background-color: var(--karamel-dark);
+  min-height: 70px;
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  z-index: 100;
+}
+
+.navbar-hero,
+.navbar-transparent {
+  background: linear-gradient(180deg, rgba(42, 27, 21, 0.9) 0%, rgba(42, 27, 21, 0) 100%) !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 200;
 }
 
 .navbar-karamel .navbar-brand {
-  color: var(--karamel-amber-light) !important;
-  font-size: 1.6rem;
-  letter-spacing: 0.5px;
+  position: absolute;
+  top: 8px;
+  left: 60px;
+  z-index: 110;
+  background-color: rgba(250, 249, 248, 0.92); 
+  padding: 2px 8px;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.logo-img {
+  height: 135px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
 }
 
 .navbar-karamel .nav-link {
-  color: #f0e6da !important;
-  margin-left: 0.5rem;
-  transition: color 0.2s ease;
+  color: #f7f3ed;
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 8px 16px;
+  margin: 0 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.25s ease;
 }
 
 .navbar-karamel .nav-link:hover {
-  color: var(--karamel-amber-light) !important;
+  background-color: rgba(193, 122, 61, 0.4);
+  border-color: var(--karamel-amber);
+  color: #ffffff;
 }
 
-/* Resaltado de la sección activa (controlado por js/main.js) */
 .navbar-karamel .nav-link.active {
-  color: var(--karamel-amber-light) !important;
-  border-bottom: 2px solid var(--karamel-amber-light);
+  background-color: var(--karamel-amber);
+  border-color: var(--karamel-amber);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(193, 122, 61, 0.4);
 }
 
-/* ---------- HERO ---------- */
+/* ==========================================================================
+   3. HERO Y CARRUSEL PRINCIPAL (INDEX)
+   ========================================================================== */
+.hero-index,
 .hero-karamel {
-  background: linear-gradient(rgba(43, 24, 16, 0.55), rgba(43, 24, 16, 0.55)),
-              url('../img/hero-hotel.jpg') center/cover no-repeat;
-  color: #fff;
-  padding: 6rem 1rem;
+  position: relative;
+  background-color: var(--karamel-dark);
+}
+
+.hero-img {
+  width: 100%;
+  height: 85vh !important;
+  min-height: 500px;
+  object-fit: cover;
+  filter: brightness(0.45) contrast(1.05);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  color: #ffffff;
+  padding-top: 60px;
+  pointer-events: none;
+}
+
+.hero-overlay h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.hero-overlay .lead,
+.hero-overlay p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-overlay a, 
+.hero-overlay button {
+  pointer-events: auto;
+}
+
+/* Controles del Hero Corregidos */
+.hero-karamel .carousel-control-prev,
+.hero-karamel .carousel-control-next {
+  z-index: 5; 
+  width: 7%;
+  opacity: 0.85;
+  background: transparent !important;
+  border: none !important;
+}
+
+.hero-karamel .carousel-control-prev-icon,
+.hero-karamel .carousel-control-next-icon {
+  /* Fondo grisáceo claro semi-transparente */
+  background-color: rgba(180, 180, 180, 0.4); 
+  border-radius: 50%;
+  padding: 22px; 
+  background-size: 50% 50%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  width: 2rem;
+  height: 2rem;
+}
+
+.hero-karamel .carousel-control-prev:hover,
+.hero-karamel .carousel-control-next:hover {
+  opacity: 1;
+}
+
+/* Reemplaza la regla :hover anterior por estas dos */
+.hero-karamel .carousel-control-prev:hover .carousel-control-prev-icon {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
+  filter: none; /* Eliminamos el filtro */
+  /* Insertamos una flecha oscura orientada a la izquierda */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232a1b15'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+}
+
+.hero-karamel .carousel-control-next:hover .carousel-control-next-icon {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
+  filter: none; /* Eliminamos el filtro */
+  /* Insertamos una flecha oscura orientada a la derecha */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232a1b15'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+/* ==========================================================================
+   4. CABECERAS SECUNDARIAS
+   ========================================================================== */
+.hero-secundario {
+  background-color: var(--karamel-dark);
+  color: #ffffff;
+  padding-top: 1rem !important;
+  padding-bottom: 2rem;
   text-align: center;
+  position: relative;
 }
 
-.hero-karamel h1 {
-  font-size: 3rem;
+.hero-secundario h1,
+.hero-secundario h2,
+.titulo-pagina {
+  color: #ffffff !important;
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- BOTONES ---------- */
+/* ==========================================================================
+   5. BOTONES GENERALES
+   ========================================================================== */
 .btn-karamel {
   background-color: var(--karamel-amber);
   border-color: var(--karamel-amber);
-  color: #fff;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  transition: all 0.25s ease;
 }
 
 .btn-karamel:hover {
   background-color: var(--karamel-amber-light);
   border-color: var(--karamel-amber-light);
-  color: #2b1810;
+  color: var(--karamel-dark);
+  box-shadow: 0 4px 12px rgba(193, 122, 61, 0.3);
 }
 
-/* ---------- CARDS (habitaciones, servicios, testimonios) ---------- */
+.btn-outline-karamel {
+  border: 1px solid var(--karamel-amber);
+  color: var(--karamel-amber);
+  background-color: transparent;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.btn-outline-karamel:hover {
+  background-color: var(--karamel-amber);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   6. SECCIONES Y TARJETAS GENERALES
+   ========================================================================== */
+section {
+  padding: 4rem 0;
+}
+
+.bg-suave {
+  background-color: var(--karamel-cream-soft);
+}
+
 .card-karamel {
   border: none;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 10px rgba(43, 24, 16, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 18px rgba(42, 27, 21, 0.06);
   overflow: hidden;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-karamel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(42, 27, 21, 0.12);
 }
 
 .card-karamel .card-title {
@@ -94,21 +274,330 @@ h1, h2, h3, .navbar-brand {
 
 .card-karamel .precio {
   color: var(--karamel-amber);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   7. CONTENIDOS DEL INDEX (BIENVENIDA Y COMPROMISO)
+   ========================================================================== */
+.subtitulo-etiqueta {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--karamel-amber);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+.titulo-destacado {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--karamel-dark);
+  line-height: 1.2;
+}
+
+.titulo-seccion {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--karamel-dark);
+}
+
+.texto-cuerpo {
+  color: var(--karamel-text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.style-img-bienvenida {
+  height: 520px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.style-img-compromiso {
+  height: 380px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* ==========================================================================
+   8. CARRUSEL "DESCUBRE NUESTRO HOTEL"
+   ========================================================================== */
+.sec-descubre {
+  background-color: transparent;
+}
+
+#carruselDescubre {
+  position: relative;
+  padding: 0 45px;
+}
+
+/* Flechas Descubre Corregidas */
+#carruselDescubre .carousel-control-prev-icon,
+#carruselDescubre .carousel-control-next-icon {
+  filter: invert(1);
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+#carruselDescubre .carousel-control-prev,
+#carruselDescubre .carousel-control-next {
+  width: 46px;
+  height: 46px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #e0d7cd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+#carruselDescubre .carousel-control-prev { left: 0; }
+#carruselDescubre .carousel-control-next { right: 0; }
+
+.img-carrusel-descubre {
+  height: 290px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.img-carrusel-descubre:hover {
+  transform: scale(1.02);
+}
+
+/* ==========================================================================
+   9. SECCIÓN OPINIONES DE HUÉSPEDES
+   ========================================================================== */
+.sec-opiniones {
+  background-color: transparent;
+}
+
+/* Carril Corregido para las Opiniones */
+#carruselOpiniones {
+  position: relative;
+  padding: 0 65px;
+}
+
+.card-opinion {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(193, 122, 61, 0.18);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-opinion:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.badge-puntuacion {
+  width: 44px;
+  height: 44px;
+  background-color: var(--karamel-green);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.nombre-usuario {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--karamel-dark);
+}
+
+.texto-opinion {
+  color: #4a423b;
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.border-top-custom {
+  border-top: 1px solid #f2ece4;
+}
+
+.corazon-likes {
+  color: var(--karamel-green);
+  font-size: 0.88rem;
   font-weight: 600;
 }
 
-/* ---------- SECCIONES ---------- */
-section {
-  padding: 4rem 0;
+.fecha-opinion {
+  color: var(--karamel-muted);
+  font-size: 0.825rem;
 }
 
-section h2 {
-  color: var(--karamel-dark);
-  margin-bottom: 2rem;
-  text-align: center;
+/* Flechas Opiniones Corregidas */
+#carruselOpiniones .carousel-control-prev,
+#carruselOpiniones .carousel-control-next {
+  width: 44px;
+  height: 44px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 1px solid #e5ded5;
+  top: 45%;
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
 }
 
-/* ---------- MENSAJES DE ESTADO (validaciones, confirmaciones) ---------- */
+#carruselOpiniones .carousel-control-prev-icon,
+#carruselOpiniones .carousel-control-next-icon {
+  filter: invert(0.2);
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+#carruselOpiniones .carousel-control-prev { left: 5px; }
+#carruselOpiniones .carousel-control-next { right: 5px; }
+
+#carruselOpiniones .carousel-control-prev:hover,
+#carruselOpiniones .carousel-control-next:hover {
+  background-color: var(--karamel-amber);
+  border-color: var(--karamel-amber);
+}
+
+#carruselOpiniones .carousel-control-prev:hover .carousel-control-prev-icon,
+#carruselOpiniones .carousel-control-next:hover .carousel-control-next-icon {
+  filter: invert(1);
+}
+
+#carruselOpiniones .carousel-indicators [data-bs-target] {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--karamel-amber);
+  opacity: 0.3;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+}
+
+#carruselOpiniones .carousel-indicators .active {
+  opacity: 1;
+  background-color: var(--karamel-green);
+  width: 22px;
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   10. PESTAÑA RESERVAS Y FORMULARIOS
+   ========================================================================== */
+.paso-numero {
+  width: 34px;
+  height: 34px;
+  background-color: var(--karamel-amber);
+  color: #ffffff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.card-reserva {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.form-control-karamel {
+  border-radius: 10px;
+  border: 1px solid #e2d9cd;
+  padding: 0.65rem 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.form-control-karamel:focus {
+  border-color: var(--karamel-amber);
+  box-shadow: 0 0 0 0.25rem rgba(193, 122, 61, 0.18);
+}
+
+.card-servicio-option {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fdfbf7;
+  border-color: #eee7dd !important;
+}
+
+.card-servicio-option:hover {
+  border-color: var(--karamel-amber) !important;
+  background-color: #ffffff;
+}
+
+.card-resumen {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  background-color: #ffffff;
+}
+
+.bg-karamel {
+  background-color: var(--karamel-dark) !important;
+}
+
+.text-karamel {
+  color: var(--karamel-amber) !important;
+}
+
+.bg-karamel-subtle {
+  background-color: #f4ece1;
+  color: #725131;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   11. FOOTER Y NOTIFICACIONES
+   ========================================================================== */
+.footer-karamel {
+  background-color: var(--karamel-dark-deep);
+  color: #e2d9d0;
+}
+
+.footer-karamel .link-footer {
+  color: #b5a495;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-karamel .link-footer:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-karamel .icono-red {
+  color: #cbb29a;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-karamel .icono-red:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.footer-karamel .text-muted {
+  color: #b5a495 !important;
+}
+
 .mensaje-exito {
   color: #2e7d32;
   background-color: #e8f5e9;
@@ -131,18 +620,738 @@ section h2 {
   display: none;
 }
 
-/* ---------- FOOTER ---------- */
-.footer-karamel {
-  background-color: var(--karamel-dark);
-  color: #f0e6da;
-  padding: 3rem 0 1.5rem;
+/* ==========================================================================
+   12. REGLAS RESPONSIVAS (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .navbar-hero,
+  .navbar-transparent {
+    background-color: var(--karamel-dark) !important;
+    position: relative;
+  }
+  
+  .navbar-karamel .navbar-brand {
+    left: 20px;
+    top: 5px;
+  }
+
+  .logo-img {
+    height: 90px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2.4rem;
+  }
+
+  .hero-overlay .lead,
+  .hero-overlay p {
+    font-size: 1.1rem;
+  }
+
+  .style-img-bienvenida {
+    height: 360px;
+    border-radius: 16px;
+  }
+
+  #carruselOpiniones { padding: 0 45px; }
+  #carruselOpiniones .carousel-control-prev { left: 0; }
+  #carruselOpiniones .carousel-control-next { right: 0; }
 }
 
-.footer-karamel a {
-  color: var(--karamel-amber-light);
-  text-decoration: none;
+@media (min-width: 992px) {
+  .hero-secundario {
+    padding-top: 0.5rem !important;
+    padding-bottom: 1.5rem;
+  }
 }
 
-.footer-karamel a:hover {
-  text-decoration: underline;
+
+
+  /*AUTENTICACIÓN"
+  Registro y Login*/
+
+
+
+/* CONTENEDOR PRINCIPAL */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 60px;
+
 }
+
+
+.auth-container {
+
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.1);
+
+}
+
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+
+
+.auth-header h1 {
+
+    margin-bottom: 10px;
+
+}
+
+
+.auth-header p {
+
+    color: #666;
+    line-height: 1.6;
+
+}
+
+.auth-form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+}
+
+
+.auth-form .form-group {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+
+.auth-form label {
+
+    font-weight: 600;
+
+}
+
+
+
+/* INPUTS */
+
+.auth-form input {
+
+    width: 100%;
+    padding: 12px 14px;
+    border:
+        1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+
+}
+
+
+.auth-form input:focus {
+
+    border-color: #b8860b;
+    box-shadow:
+        0 0 0 3px
+        rgba(184, 134, 11, 0.1);
+
+}
+
+
+.auth-btn {
+
+    width: 100%;
+    margin-top: 10px;
+
+}
+
+
+.auth-footer {
+
+    text-align: center;
+    margin-top: 25px;
+
+}
+
+
+.auth-footer a {
+
+    color: #b8860b;
+    font-weight: 600;
+    text-decoration: none;
+
+}
+
+
+.auth-footer a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+.auth-message {
+
+    display: none;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+
+}
+
+
+.auth-message-error {
+
+    display: block;
+    background: #ffe5e5;
+    color: #b00020;
+
+}
+
+
+.auth-message-success {
+
+    display: block;
+    background: #e5f7e8;
+    color: #1b6e2d;
+
+}
+
+@media (max-width: 600px) {
+
+    .auth-container {
+        padding: 30px 20px;
+    }
+
+}
+
+
+/* ============================================
+   PERFIL DE USUARIO
+   ============================================ */
+
+
+.perfil-page {
+
+    min-height: 100vh;
+
+    padding-top: 90px;
+
+    padding-bottom: 60px;
+
+}
+
+
+.perfil-header {
+
+    margin-bottom: 45px;
+
+}
+
+
+.perfil-icon {
+
+    font-size: 4rem;
+
+    color: #b8860b;
+
+}
+
+
+.perfil-header h1 {
+
+    margin-top: 10px;
+
+}
+
+
+.perfil-header p {
+
+    color: #777;
+
+}
+
+
+
+/* ============================================
+   TARJETAS
+   ============================================ */
+
+
+.perfil-card {
+
+    background: #ffffff;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+    height: 100%;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+.perfil-card h2 {
+
+    font-size: 1.5rem;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+/* ============================================
+   INFORMACIÓN
+   ============================================ */
+
+
+.perfil-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+.perfil-info-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding-bottom: 15px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+}
+
+
+.perfil-info-label {
+
+    font-size: 0.9rem;
+
+    color: #777;
+
+}
+
+
+
+/* ============================================
+   SIN RESERVAS
+   ============================================ */
+
+
+.sin-reservas {
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+}
+
+
+.sin-reservas-icon {
+
+    font-size: 3rem;
+
+    color: #b8860b;
+
+}
+
+
+.sin-reservas h3 {
+
+    margin-top: 15px;
+
+    font-size: 1.3rem;
+
+}
+
+
+.sin-reservas p {
+
+    color: #777;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+
+@media (max-width: 768px) {
+
+    .perfil-page {
+
+        padding-top: 60px;
+
+    }
+
+
+    .perfil-card {
+
+        padding: 25px 20px;
+
+    }
+
+}
+
+
+/* ============================================
+   RESERVAS DEL PERFIL
+   ============================================ */
+
+
+.reserva-perfil-card {
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(0, 0, 0, 0.05);
+
+}
+
+
+.reserva-perfil-card:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+
+/* ============================================
+   CABECERA DE RESERVA
+   ============================================ */
+
+
+.reserva-perfil-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.reserva-perfil-header h3 {
+
+    margin: 5px 0 0;
+
+    font-size: 1.35rem;
+
+}
+
+
+.reserva-codigo {
+
+    font-size: 0.8rem;
+
+    color: #777;
+
+    font-weight: 600;
+
+}
+
+
+.reserva-estado {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    background: #e8f7ec;
+
+    color: #218838;
+
+    padding: 7px 12px;
+
+    border-radius: 50px;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+
+
+/* ============================================
+   IMAGEN
+   ============================================ */
+
+
+.reserva-perfil-img {
+
+    width: 100%;
+
+    height: 160px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+}
+
+
+
+/* ============================================
+   DATOS
+   ============================================ */
+
+
+.reserva-datos-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.reserva-dato {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.reserva-dato span {
+
+    color: #777;
+
+    font-size: 0.85rem;
+
+}
+
+
+.reserva-dato span i {
+
+    color: #b8860b;
+
+    margin-right: 5px;
+
+}
+
+
+
+/* ============================================
+   SERVICIOS
+   ============================================ */
+
+
+.reserva-servicios {
+
+    margin-top: 22px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #eeeeee;
+
+}
+
+
+.reserva-servicios h4 {
+
+    font-size: 1rem;
+
+    margin-bottom: 12px;
+
+}
+
+
+.reserva-servicios-lista {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+
+.reserva-servicio {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 11px;
+
+    background: #f7f4ed;
+
+    border-radius: 50px;
+
+    font-size: 0.85rem;
+
+}
+
+
+.reserva-servicio i {
+
+    color: #b8860b;
+
+}
+
+
+
+/* ============================================
+   TOTAL
+   ============================================ */
+
+
+.reserva-perfil-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 20px;
+
+    margin-top: 22px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #eeeeee;
+
+}
+
+
+.reserva-total-label {
+
+    display: block;
+
+    color: #777;
+
+    font-size: 0.8rem;
+
+    margin-bottom: 3px;
+
+}
+
+
+.reserva-total {
+
+    display: block;
+
+    color: #b8860b;
+
+    font-size: 1.4rem;
+
+}
+
+
+.reserva-confirmada-texto {
+
+    color: #218838;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+}
+
+
+
+/* ============================================
+   RESPONSIVE RESERVAS
+   ============================================ */
+
+
+@media (max-width: 768px) {
+
+    .reserva-perfil-header {
+
+        flex-direction: column;
+
+    }
+
+
+    .reserva-datos-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+    }
+
+
+    .reserva-perfil-footer {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .reserva-perfil-img {
+
+        height: 200px;
+
+    }
+
+}
+
+

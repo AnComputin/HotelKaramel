@@ -5,46 +5,9 @@
    R.13: Filtro de habitaciones por tipo/precio
    ============================================ */
 
-// Datos iniciales de las habitaciones con tus rutas de imágenes locales
-const datosIniciales = [
-  { 
-    nombre: "Habitación Individual", 
-    tipo: "individual", 
-    precio: 40000, 
-    disponibles: 3, 
-    imagen: "img/habitacion_simple.png", 
-    descripcion: "Ideal para viajeros solos. Incluye Wi-Fi y desayuno continental." 
-  },
-  { 
-    nombre: "Habitación Doble", 
-    tipo: "doble", 
-    precio: 65000, 
-    disponibles: 5, 
-    imagen: "img/habitacion_doble.jpg", 
-    descripcion: "Cómoda habitación para 2 personas con cama matrimonial o 2 camas twin." 
-  },
-  { 
-    nombre: "Suite Karamel", 
-    tipo: "suite", 
-    precio: 120000, 
-    disponibles: 2, 
-    imagen: "img/suite_karamel.jpg", 
-    descripcion: "Máximo confort y espacio con vista panorámica y jacuzzi privado." 
-  }
-];
-
-// Obtener habitaciones desde localStorage o guardar el estado inicial
-function obtenerHabitaciones() {
-  const guardadas = localStorage.getItem("habitaciones_karamel");
-  if (guardadas) {
-    return JSON.parse(guardadas);
-  } else {
-    localStorage.setItem("habitaciones_karamel", JSON.stringify(datosIniciales));
-    return datosIniciales;
-  }
-}
-
-let habitaciones = obtenerHabitaciones();
+// El array `habitaciones` ahora vive en js/habitaciones-data.js (fuente única
+// de verdad, compartida con reservas.js) para que precio/disponibilidad nunca
+// queden desincronizados entre páginas. Ese script debe cargarse antes que este.
 
 const contenedorHabitaciones = document.getElementById("lista-habitaciones");
 const contadorDisponibles = document.getElementById("contador-disponibles");
@@ -53,7 +16,6 @@ const filtroPrecio = document.getElementById("filtro-precio");
 
 // R.2 — Dibuja las cards de habitaciones en pantalla
 function renderizarHabitaciones(lista) {
-  if (!contenedorHabitaciones) return;
   contenedorHabitaciones.innerHTML = "";
 
   lista.forEach((hab) => {
@@ -62,23 +24,13 @@ function renderizarHabitaciones(lista) {
     columna.dataset.tipo = hab.tipo;
     columna.dataset.precio = hab.precio;
 
-    // Verificar si quedan unidades disponibles
-    const hayCupo = hab.disponibles > 0;
-    const botonHTML = hayCupo 
-      ? `<a href="reservas.html?habitacion=${hab.tipo}" class="btn btn-karamel mt-3 w-100">Reservar</a>`
-      : `<button class="btn btn-secondary mt-3 w-100" disabled>Agotada</button>`;
-
     columna.innerHTML = `
-      <div class="card card-karamel h-100 shadow-sm">
+      <div class="card card-karamel h-100">
         <img src="${hab.imagen}" class="card-img-top" alt="${hab.nombre}">
-        <div class="card-body d-flex flex-column justify-content-between">
-          <div>
-            <h5 class="card-title fw-bold">${hab.nombre}</h5>
-            <p class="card-text text-muted">${hab.descripcion}</p>
-            <p class="precio fw-bold text-primary fs-5 mb-1">$${hab.precio.toLocaleString("es-CL")} / noche</p>
-            <small class="text-secondary d-block">Disponibles: <strong>${hab.disponibles}</strong></small>
-          </div>
-          ${botonHTML}
+        <div class="card-body">
+          <h5 class="card-title">${hab.nombre}</h5>
+          <p class="card-text">${hab.descripcion}</p>
+          <p class="precio">$${hab.precio.toLocaleString("es-CL")} / noche</p>
         </div>
       </div>
     `;
@@ -89,7 +41,6 @@ function renderizarHabitaciones(lista) {
 
 // R.9 — Actualiza el contador según la lista visible actualmente
 function actualizarContador(lista) {
-  if (!contadorDisponibles) return;
   const totalDisponibles = lista.reduce((suma, hab) => suma + hab.disponibles, 0);
   contadorDisponibles.textContent = totalDisponibles;
 }
@@ -113,13 +64,11 @@ function aplicarFiltros() {
   actualizarContador(resultado);
 }
 
-// Escuchadores de eventos para los filtros
-if (filtroTipo) filtroTipo.addEventListener("change", aplicarFiltros);
-if (filtroPrecio) filtroPrecio.addEventListener("change", aplicarFiltros);
+filtroTipo.addEventListener("change", aplicarFiltros);
+filtroPrecio.addEventListener("change", aplicarFiltros);
 
 // Estado inicial al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
-  habitaciones = obtenerHabitaciones();
   renderizarHabitaciones(habitaciones);
   actualizarContador(habitaciones);
 });
