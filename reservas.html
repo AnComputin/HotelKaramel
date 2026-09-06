@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas — Hotel Karamel</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Cabecera unificada -->
+    <header class="hero-secundario">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-karamel">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/logo.png" alt="Hotel Karamel" class="logo-img">
+                </a>
+                <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="habitaciones.html">Habitaciones</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="reservas.html">Reservas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="servicios.html">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container text-center py-2">
+            <h1 class="titulo-pagina">Haz tu Reserva</h1>
+            <p class="text-white-50">Diseña tu estadía perfecta frente al mar</p>
+        </div>
+    </header>
+
+    <main class="container py-5">
+        <form id="form-reserva" novalidate>
+            <div class="row g-4">
+
+                <!-- COLUMNA IZQUIERDA: Formulario de Selección -->
+                <div class="col-lg-7 col-xl-8">
+
+                    <!-- Paso 1: Datos del Huésped y Fechas -->
+                    <div class="card card-reserva p-4 mb-4 border-0 shadow-sm">
+                        <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <span class="paso-numero">1</span> Datos de Estancia
+                        </h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label fw-semibold">Nombre completo *</label>
+                                <input type="text" id="nombre" class="form-control form-control-karamel" placeholder="Ej: Maria González" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label fw-semibold">Correo electrónico *</label>
+                                <input type="email" id="email" class="form-control form-control-karamel" placeholder="nombre@correo.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fecha-entrada" class="form-label fw-semibold">Fecha de entrada *</label>
+                                <input type="date" id="fecha-entrada" class="form-control form-control-karamel" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fecha-salida" class="form-label fw-semibold">Fecha de salida *</label>
+                                <input type="date" id="fecha-salida" class="form-control form-control-karamel" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="num-huespedes" class="form-label fw-semibold">Número de huéspedes *</label>
+                                <select id="num-huespedes" class="form-select form-control-karamel" required>
+                                    <option value="1">1 Persona</option>
+                                    <option value="2" selected>2 Personas</option>
+                                    <option value="3">3 Personas</option>
+                                    <option value="4">4 Personas</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Elección de Habitación -->
+                    <div class="card card-reserva p-4 mb-4 border-0 shadow-sm">
+                        <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <span class="paso-numero">2</span> Selección de Habitación
+                        </h4>
+                        <label for="select-habitacion" class="form-label fw-semibold">Tipo de Habitación *</label>
+                        <select id="select-habitacion" class="form-select form-control-karamel mb-3" required>
+                            <option value="" disabled selected>Cargando opciones...</option>
+                        </select>
+
+                        <!-- Preview dinámico de la habitación seleccionada -->
+                        <div id="preview-habitacion" class="p-3 bg-light rounded-3 d-none">
+                            <div class="d-flex align-items-center gap-3">
+                                <img id="hab-preview-img" src="" alt="Habitación" class="rounded-3 object-fit-cover" style="width: 100px; height: 70px;">
+                                <div>
+                                    <h6 id="hab-preview-titulo" class="fw-bold mb-1"></h6>
+                                    <p id="hab-preview-desc" class="text-muted small mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3: Selección de Servicios Adicionales -->
+                    <div class="card card-reserva p-4 mb-4 border-0 shadow-sm">
+                        <h4 class="fw-bold mb-2 d-flex align-items-center gap-2">
+                            <span class="paso-numero">3</span> Servicios Adicionales (Opcional)
+                        </h4>
+                        <p class="text-muted small mb-3">Complementa tu estadía con las experiencias exclusivas de Karamel</p>
+
+                        <div class="row g-3">
+                            <!-- Piscina -->
+                            <div class="col-md-6">
+                                <div class="form-check card-servicio-option p-3 rounded-3 border">
+                                    <input class="form-check-input check-servicio me-2" type="checkbox" id="srv-piscina" value="15000" data-nombre="Piscina Climatizada">
+                                    <label class="form-check-label w-100" for="srv-piscina">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <strong>Piscina Climatizada</strong>
+                                            <span class="badge bg-karamel-subtle">$15.000 / pers</span>
+                                        </div>
+                                        <small class="text-muted d-block mt-1">Acceso diario por persona</small>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Spa -->
+                            <div class="col-md-6">
+                                <div class="form-check card-servicio-option p-3 rounded-3 border">
+                                    <input class="form-check-input check-servicio me-2" type="checkbox" id="srv-spa" value="35000" data-nombre="Spa & Bienestar">
+                                    <label class="form-check-label w-100" for="srv-spa">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <strong>Spa & Bienestar</strong>
+                                            <span class="badge bg-karamel-subtle">$35.000 / pers</span>
+                                        </div>
+                                        <small class="text-muted d-block mt-1">Sesión de saunas y hidromasaje</small>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Restaurante -->
+                            <div class="col-md-6">
+                                <div class="form-check card-servicio-option p-3 rounded-3 border">
+                                    <input class="form-check-input check-servicio me-2" type="checkbox" id="srv-restaurante" value="25000" data-nombre="Menú Restaurante Gourmet">
+                                    <label class="form-check-label w-100" for="srv-restaurante">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <strong>Cena Gourmet</strong>
+                                            <span class="badge bg-karamel-subtle">$25.000 / pers</span>
+                                        </div>
+                                        <small class="text-muted d-block mt-1">Menú degustación de autor</small>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Estacionamiento -->
+                            <div class="col-md-6">
+                                <div class="form-check card-servicio-option p-3 rounded-3 border">
+                                    <input class="form-check-input check-servicio me-2" type="checkbox" id="srv-estacionamiento" value="0" data-nombre="Estacionamiento Privado">
+                                    <label class="form-check-label w-100" for="srv-estacionamiento">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <strong>Estacionamiento</strong>
+                                            <span class="badge bg-success-subtle text-success">Gratis</span>
+                                        </div>
+                                        <small class="text-muted d-block mt-1">Reserva de plaza subterránea</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paso 4: Código Promocional -->
+                    <div class="card card-reserva p-4 mb-4 border-0 shadow-sm">
+                        <h4 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                            <span class="paso-numero">4</span> ¿Tienes un código de descuento?
+                        </h4>
+                        <div class="input-group">
+                            <input type="text" id="codigo-promo" class="form-control form-control-karamel text-uppercase" placeholder="Ej: KARAMEL10">
+                            <button type="button" id="btn-aplicar-promo" class="btn btn-outline-karamel fw-semibold">Aplicar</button>
+                        </div>
+                        <div id="msg-promo" class="form-text mt-2">Prueba con <strong>KARAMEL10</strong> o <strong>KARAMEL20</strong></div>
+                    </div>
+
+                </div>
+
+                <!-- COLUMNA DERECHA: Resumen Pegajoso (Live Summary) -->
+                <div class="col-lg-5 col-xl-4">
+                    <div class="card card-resumen border-0 shadow position-sticky" style="top: 100px;">
+                        <div class="card-header bg-karamel text-white py-3 rounded-top-4">
+                            <h5 class="mb-0 fw-bold"><i class="bi bi-receipt me-2"></i>Resumen de Reserva</h5>
+                        </div>
+                        <div class="card-body p-4">
+                            
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Habitación:</span>
+                                <strong id="res-habitacion-nombre" class="text-end">No seleccionada</strong>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Noches:</span>
+                                <strong id="res-noches">1 noche</strong>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Huéspedes:</span>
+                                <strong id="res-huespedes">2 pers.</strong>
+                            </div>
+
+                            <hr class="my-3">
+
+                            <!-- Desglose de precios -->
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-muted">Subtotal Habitación:</span>
+                                <span id="res-subtotal-hab" class="fw-semibold">$0</span>
+                            </div>
+
+                            <div id="res-contenedor-servicios" class="mb-2 d-none">
+                                <span class="text-muted small d-block mb-1">Servicios adicionales:</span>
+                                <div id="res-lista-servicios" class="ps-2 small text-secondary"></div>
+                            </div>
+
+                            <div id="res-linea-descuento" class="d-flex justify-content-between mb-2 text-success d-none">
+                                <span>Descuento aplicado:</span>
+                                <strong id="res-monto-descuento">-$0</strong>
+                            </div>
+
+                            <hr class="my-3">
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h5 class="fw-bold mb-0">Total a pagar:</h5>
+                                    <small class="text-muted fs-7">Impuestos incluidos</small>
+                                </div>
+                                <h3 id="res-precio-total" class="fw-bold text-karamel mb-0">$0</h3>
+                            </div>
+
+                            <button type="submit" id="btn-confirmar" class="btn btn-karamel w-100 py-3 rounded-pill fw-bold fs-5 shadow-sm">
+                                Confirmar Reserva
+                            </button>
+
+                            <small class="text-muted text-center d-block mt-3 extra-small">
+                                <i class="bi bi-shield-check me-1"></i> Reserva 100% segura y cancelación flexible.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </main>
+
+    <!-- Modal de Confirmación Exitosa -->
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-body text-center p-4 p-md-5">
+                    <div class="icono-exito mb-3 text-success">
+                        <i class="bi bi-check-circle-fill display-1"></i>
+                    </div>
+                    <h3 class="fw-bold text-karamel mb-2">¡Reserva Confirmada!</h3>
+                    <p class="text-muted">Hemos enviado el comprobante de reserva a <strong id="confirm-email"></strong>.</p>
+                    <div class="bg-light p-3 rounded-3 text-start small mb-4">
+                        <p class="mb-1"><strong>Titular:</strong> <span id="confirm-nombre"></span></p>
+                        <p class="mb-1"><strong>Habitación:</strong> <span id="confirm-habitacion"></span></p>
+                        <p class="mb-1"><strong>Fechas:</strong> <span id="confirm-fechas"></span></p>
+                        <p class="mb-0"><strong>Total Pagado:</strong> <span id="confirm-total" class="fw-bold text-karamel"></span></p>
+                    </div>
+                    <button type="button" id="btn-volver-inicio" class="btn btn-karamel w-100 rounded-pill py-2" data-bs-dismiss="modal">Volver al Inicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/habitaciones-data.js"></script>
+    <script src="js/reservas.js"></script>
+    <script src="js/footer.js" defer></script>
+</body>
+</html>
